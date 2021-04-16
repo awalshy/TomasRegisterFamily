@@ -19,7 +19,7 @@ const FamilyCreation = ({
 
   const [family, setFamily] = useState('')
   const [famCode, setFamCode] = useState('')
-  const [loaded, setLoaded] = useState(false)
+  const [loaded, setLoaded] = useState(true)
 
   const [userRef, setUserRef] = useState<firebase.firestore.DocumentReference>()
 
@@ -58,6 +58,7 @@ const FamilyCreation = ({
     } catch (e) {
       console.error(e.message)
     }
+    handleNext()
   }
 
   return (
@@ -68,22 +69,36 @@ const FamilyCreation = ({
         </div>
       }
       {loaded &&
-        <div className={classes.container}>
-          <div>
-            <Typography>Family: {family}</Typography>
-            <Typography>Code: {famCode}</Typography>
+        <div>
+          <div className={classes.row}>
+            <div className={classes.half}>
+              <img
+                src="/logo_head.svg"
+                width="25%"
+              />
+            </div>
+            <div className={classes.halfRight}>
+              <Typography variant="h4" color="primary">Le compte et la famille ont été créé avec succès !</Typography>
+              <Typography variant="h6" color="secondary">Famille {family}</Typography>
+              <br />
+              <Typography>
+                Vous pouvez désormais vous connecter sur l'application TOMAS Family App et vous connecter avec ce compte !
+                Vous pouvez également transmettre le code famille ci-dessous afin que les autres membres de la famille pour qu'ils puissent la rejoindre !
+              </Typography>
+              <Typography variant="h4" color="secondary">Code à entrer: {famCode}</Typography>
+            </div>
           </div>
-          <div>
-            <Button disabled onClick={handleBack} className={classes.button}>
-              Retour
-            </Button>
+          <div className={classes.formActions}>
             <Button
               variant="contained"
               color="primary"
               onClick={saveFamily}
               className={classes.button}
             >
-              Confirmer
+              Terminer
+            </Button>
+            <Button disabled onClick={handleBack} className={classes.button}>
+              Retour
             </Button>
           </div>
         </div>
@@ -96,11 +111,30 @@ const useStyles = makeStyles(theme => ({
   loadContainer: {
     width: '80vw'
   },
-  container: {
-    marginLeft: '5vw'
+  row: {
+    width: '100vw',
+    display: 'flex',
+    flexDirection: 'row',
+    marginBottom: '5vh'
+  },
+  half: {
+    width: '40%',
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  halfRight: {
+    width: '60%',
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column'
   },
   button: {
     marginRight: theme.spacing(1)
+  },
+  formActions: {
+    display: 'flex',
+    flexDirection: 'row-reverse',
+    marginRight: '3vw'
   }
 }))
 

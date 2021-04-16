@@ -40,51 +40,55 @@ const RootUserCreation = (
   }
 
   return (
-    <div className={classes.container}>
-      <form>
-        <Typography
-          variant="h4"
-        >
-          Création de l'utilisateur principal
-        </Typography>
-        <Divider />
-        <div className={classes.space}></div>
-        <div className={classes.fields}>
-          <TextField
-            value={firstName}
-            className={classes.input}
-            onChange={e => setFirstName(e.target.value)}
-            id="firstname"
-            placeholder="Prénom"
-          />
-          <TextField
-            value={lastName}
-            className={classes.input}
-            onChange={e => setLastName(e.target.value)}
-            id="lastname"
-            placeholder="Nom de Famille"
-          />
-          <TextField
-            value={email}
-            className={classes.input}
-            onChange={e => setEmail(e.target.value)}
-            id="email"
-            placeholder="Email"
-          />
-          <TextField
-            value={password}
-            className={classes.input}
-            onChange={e => setPassword(e.target.value)}
-            id="password"
-            placeholder="Mot de Passe"
-            type="password"
-          />
+    <div>
+      <div className={classes.row}>
+        <div className={classes.half}>
+          <form className={classes.container} onSubmit={moveNext}>
+            <Typography
+              variant="h4"
+            >
+              Création de l'utilisateur principal
+            </Typography>
+            <Divider />
+            <div className={classes.space}></div>
+            <div className={classes.fields}>
+              <TextField
+                value={firstName}
+                className={classes.input}
+                onChange={e => setFirstName(e.target.value)}
+                id="firstname"
+                placeholder="Prénom"
+              />
+              <TextField
+                value={lastName}
+                className={classes.input}
+                onChange={e => setLastName(e.target.value)}
+                id="lastname"
+                placeholder="Nom de Famille"
+              />
+              <TextField
+                value={email}
+                className={classes.input}
+                onChange={e => setEmail(e.target.value)}
+                id="email"
+                placeholder="Email"
+              />
+              <TextField
+                value={password}
+                className={classes.input}
+                onChange={e => setPassword(e.target.value)}
+                id="password"
+                placeholder="Mot de Passe"
+                type="password"
+              />
+            </div>
+          </form>
         </div>
-      </form>
-      <div>
-          <Button disabled onClick={handleBack} className={classes.button}>
-            Retour
-          </Button>
+        <div className={classes.half}>
+          <img src="/signIn.svg" width="65%" />
+        </div>
+      </div>
+      <div className={classes.formActions}>
           <Button
             variant="contained"
             color="primary"
@@ -92,6 +96,9 @@ const RootUserCreation = (
             className={classes.button}
           >
             Suivant
+          </Button>
+          <Button disabled onClick={handleBack} className={classes.button}>
+            Retour
           </Button>
       </div>
     </div>
@@ -101,6 +108,18 @@ const RootUserCreation = (
 const useStyles = makeStyles(theme => ({
   container: {
     paddingLeft: '5vw'
+  },
+  row: {
+    display: 'flex',
+    flexDirection: 'row',
+    width: '80%',
+    paddingLeft: '5vw',
+    paddingRight: '5vw',
+    marginBottom: '5vh',
+    overflowX: 'hidden',
+  },
+  half: {
+    width: '50%'
   },
   button: {
     marginRight: theme.spacing(1),
@@ -119,7 +138,8 @@ const useStyles = makeStyles(theme => ({
   },
   formActions: {
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row-reverse',
+    marginRight: '3vw'
   }
 }))
 
