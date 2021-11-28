@@ -27,14 +27,14 @@ const RootUserCreation = (
       // register user
       const user = await auth.createUserWithEmailAndPassword(email, password)
       if (!user || !user.user) throw Error('Failed to register user')
-      // save user details
+      // Save User Details
       await firestore.collection('users').doc(user.user.uid).set({
-        family: '',
         lastName,
         firstName,
+        admin: true
       })
       handleNext()
-    } catch(e) {
+    } catch(e: any) {
       console.error(e.message)
     }
   }

@@ -44,10 +44,18 @@ const FamilyCreation = ({
 
   const saveFamily = async () => {
     try {
+      // Create family conversation
+      const convRef = await firestore.collection('conversations').add({
+        lastRead: firebase.firestore.Timestamp.fromDate(new Date(Date.now())),
+        members: [userRef],
+        msgCount: 0,
+        name: family
+      })
       const familyRef = await firestore.collection('families').add({
         code: famCode,
         name: family,
-        members: [userRef]
+        members: [userRef],
+        convId: convRef.id
       })
       if (familyRef && userRef) {
         await userRef.update({
@@ -55,7 +63,7 @@ const FamilyCreation = ({
         })
         handleNext()
       }
-    } catch (e) {
+    } catch (e: any) {
       console.error(e.message)
     }
     handleNext()
