@@ -61,7 +61,7 @@ const FamilyCreation = ({
         await userRef.update({
           family: familyRef
         })
-        handleNext()
+        window.location.href = 'https://tomas.walsharthur.fr'
       }
     } catch (e: any) {
       console.error(e.message)

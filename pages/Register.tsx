@@ -48,7 +48,7 @@ const Register = () => {
           );
         })}
       </Stepper>
-      <div style={{ marginTop: '6vh' }}>
+      <div style={{ marginTop: '6vh', marginLeft: '20vw', marginRight: '20vw' }}>
         {actStep === steps.length ? (
           <div className={classes.recap}>
             <Done color="secondary" style={{ fontSize: '5rem' }} />
